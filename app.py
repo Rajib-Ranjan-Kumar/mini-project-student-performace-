@@ -3,15 +3,23 @@ import pandas as pd
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
+import os
 
 st.title("🎓 Student Performance Predictor")
 
 # ---------------- LOAD PICKLE FILES ----------------
 
-difficulty_encoder = pickle.load(open("models/Difficulty_Level_label_encoder.pkl", "rb"))
-parent_encoder = pickle.load(open("models/Parent_Education_Level_label_encoder.pkl", "rb"))
-income_encoder = pickle.load(open("models/Family_Income_Level_label_encoder.pkl", "rb"))
-model = pickle.load(open("models/model.pkl", "rb"))
+import joblib
+
+MODEL_PATH = os.path.join("models", "model.pkl")
+ENC1 = os.path.join("models", "Difficulty_Level_label_encoder.pkl")
+ENC2 = os.path.join("models", "Parent_Education_Level_label_encoder.pkl")
+ENC3 = os.path.join("models", "Family_Income_Level_label_encoder.pkl")
+
+difficulty_encoder = joblib.load(ENC1)
+parent_encoder = joblib.load(ENC2)
+income_encoder = joblib.load(ENC3)
+model = joblib.load(MODEL_PATH)
 
 # ---------------- USER INPUT ----------------
 
